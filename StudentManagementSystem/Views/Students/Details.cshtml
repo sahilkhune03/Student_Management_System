@@ -1,0 +1,70 @@
+﻿@model StudentManagementSystem.Models.Student
+
+@{
+    ViewData["Title"] = "Student Details";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-header bg-info text-white text-center">
+                    <h4 class="mb-0">Student Details</h4>
+                </div>
+                <div class="card-body p-4">
+                    <h4 class="fw-bold mb-3">@Model.Name</h4>
+                    <hr />
+
+                    <dl class="row">
+                        <dt class="col-sm-3 fw-bold text-end">Email</dt>
+                        <dd class="col-sm-9 text-start">@Model.Email</dd>
+
+                        <dt class="col-sm-3 fw-bold text-end">Courses</dt>
+                        <dd class="col-sm-9 text-start">
+                            @if (Model.Courses != null && Model.Courses.Any())
+                            {
+                                <ul class="list-group list-group-flush">
+                                    @foreach (var course in Model.Courses)
+                                    {
+                                        <li class="list-group-item">
+                                            <i class="bi bi-journal-bookmark text-primary me-2"></i>
+                                            @course.CourseName
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <span class="text-muted fst-italic">No courses enrolled.</span>
+                            }
+                        </dd>
+                    </dl>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <a asp-action="Edit" asp-route-id="@Model.StudentId" class="btn btn-warning px-4">
+                            <i class="bi bi-pencil-square"></i> Edit
+                        </a>
+                        <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                            <i class="bi bi-arrow-left"></i> Back to List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .card {
+        border-radius: 15px;
+    }
+
+    .list-group-item {
+        border: none;
+        padding-left: 0;
+    }
+</style>
